@@ -441,7 +441,7 @@ out body;
           html: '<i class="fa-solid fa-store fa-1x"></i>',
           className: 'store-marker',
           iconSize: [32, 32],
-          iconAnchor: [16, 32]
+          iconAnchor: [8, 8]
         });
               const group = L.layerGroup();
               data.elements.forEach((el) => {
@@ -467,7 +467,7 @@ out body;
                 html: '<i class="fa-solid fa-house-medical fa-1x"></i>',
                 className: "medical-marker",
                 iconSize: [32, 32],
-                iconAnchor: [16, 32],
+                iconAnchor: [8, 8],
               });
               const layer = L.geoJSON(json, {
                 pointToLayer: (feature, latlng) =>
