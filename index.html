@@ -182,7 +182,7 @@
           <input
             type="checkbox"
             class="landmark-checkbox"
-            value="grocerystores"
+            value="Supermarkets"
           />
           Grocery Stores
         </label>
@@ -456,6 +456,26 @@ out body;
               landmarkLayers[name] = group;
             } catch (err) {
               console.error("Overpass error:", err);
+            }
+          } else if (name === "Supermarkets") {
+            // ── Supermarkets from local GeoJSON + FontAwesome icon ────
+            try {
+              const res = await fetch(`./data/${name}.geojson`);
+              if (!res.ok) throw new Error(res.statusText);
+              const json = await res.json();
+              const storeIcon = L.divIcon({
+                html: '<i class="fa-solid fa-store fa-1x"></i>',
+                className: "medical-marker",
+                iconSize: [32, 32],
+                iconAnchor: [8, 8],
+              });
+              const layer = L.geoJSON(json, {
+                pointToLayer: (feature, latlng) =>
+                  L.marker(latlng, { icon: storeIcon }),
+              }).addTo(map);
+              landmarkLayers[name] = layer;
+            } catch (err) {
+              console.error(`Failed to load ${name}.geojson:`, err);
             }
           } else if (name === "Community_Health_Centers") {
             // ── Health centers from local GeoJSON + FontAwesome icon ────
